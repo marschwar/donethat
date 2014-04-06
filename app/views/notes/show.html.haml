@@ -1,0 +1,20 @@
+.container
+  %ol.breadcrumb
+    %li= link_to('Home', trips_path)
+    %li= link_to("#{@note.trip.title}", trip_path(@note.trip))
+    %li= "#{@note.title}"
+  .page-header
+    %h1= @note.title
+    %p.highlighted
+      = format_date(@note.created_at)
+  - if @note.image?
+    .row
+      .col-md-12
+        = image_tag @note.image_path, class: 'img-responsive'
+    %hr
+  .row
+    .col-md-12
+      %p.lead= @note.content
+  - if @google
+    %hr
+    #trip-map

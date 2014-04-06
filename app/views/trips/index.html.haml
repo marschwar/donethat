@@ -1,0 +1,8 @@
+.container
+  %h1= t('.headline')
+  %p=  t('.subheadline')
+- if @carousel_items
+  = render partial: 'carousel', locals: { trips: @carousel_items }
+- if @trips
+  .container.marketing.trip
+    = render partial: 'trip', collection: @trips

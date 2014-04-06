@@ -1,0 +1,5 @@
+.col-md-8.note
+  %h2.featurette-heading= "#{note.title}"
+  %p.lead= "#{note.lead}"
+.col-md-4.note
+  = image_tag note.thumb_path, {alt: "#{note.title}", class: "img-responsive"}

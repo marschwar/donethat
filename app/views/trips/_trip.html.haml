@@ -1,0 +1,6 @@
+.row.featurette.trip
+  %a{href: "#{trip_path(trip)}", class: 'nostyle'}
+    - if trip.image?
+      = render partial: 'trip_row_with_image', locals: {trip: trip}
+    - else
+      = render partial: 'trip_row_without_image', locals: {trip: trip}

@@ -1,0 +1,7 @@
+.row.featurette.note
+  %a{href: "#{trip_note_path(@trip, note)}", class: 'nostyle'}
+    - if note.image?
+      = render partial: 'note_with_image', locals: {note: note}
+    - else
+      = render partial: 'note_without_image', locals: {note: note}
+%hr.featurette-divider

@@ -1,0 +1,22 @@
+.container.carousel-container
+  #donethat-carousel.carousel.slide
+    -if trips.count > 1
+      %ol.carousel-indicators
+        - trips.each_with_index do |trip, index|
+          %li{class: "#{'active' if index == 0}", 'data-target' => "#donethat-carousel", 'data-slide-to' => "#{index}"}
+
+    .carousel-inner
+      - trips.each_with_index do |trip, index|
+        .item{class: "#{'active' if index == 0}"}
+          %a{href: trip_path(trip)}
+            = image_tag trip.carousel_image_path
+            .carousel-caption
+              %h2= trip.title
+              -if trip.content
+                %p= trip.content.truncate 150, separator: ' '
+    -if trips.count > 1
+      %a.left.carousel-control{href: "#donethat-carousel", 'data-slide' => "prev"}
+        %span.icon-prev
+      %a.right.carousel-control{href: "#donethat-carousel", 'data-slide' => "next"}
+        %span.icon-next
+

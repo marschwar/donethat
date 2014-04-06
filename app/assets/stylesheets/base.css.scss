@@ -1,0 +1,40 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+a.nostyle, a.nostyle:hover {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/* sticky footer */
+.table-display {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+
+.table-row {
+  display: table-row;
+  height: 1px;
+}
+
+.table-row-expand {
+  height: auto;
+}
+
+nav {
+  .avatar {
+    padding-top: 4px;
+  }
+  .social {
+    padding-top: 8px;
+  }
+}
+
+footer {
+  padding: 8px 15px;
+  margin-top: 20px;
+  background-color: #9aa5a6;
+}

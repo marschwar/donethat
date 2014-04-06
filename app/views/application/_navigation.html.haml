@@ -1,0 +1,27 @@
+%nav.navbar.navbar-default{role: 'navigation'}
+  .navbar-header
+    %button.navbar-toggle{ type: "button", 'data-toggle' => "collapse", 'data-target' => '.navbar-ex1-collapse' }
+      %span.sr-only='Toggle navigation'
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    = link_to 'donethat.de', trips_path, class: 'navbar-brand'
+  .collapse.navbar-collapse.navbar-ex1-collapse
+    - if @user
+      .pull-right.avatar= image_tag @user.avatar_navigation_path if @user.avatar
+      .navbar-text.dropdown.pull-right
+        %a.dropdown-toggle{href: '#', 'data-toggle' =>"dropdown"}
+          = "#{@user.name}"
+          %span.caret
+        %ul.dropdown-menu
+          %li= link_to 'Logout', controller: 'sessions', action: 'clear'
+    - else
+      .navbar-text.pull-right
+        = 'Login with'
+        %a{href: '/auth/google_oauth2'}
+          = image_tag asset_path('social/google24.png'), title: 'Google'
+        %a{href: '/auth/twitter'}
+          = image_tag asset_path('social/twitter24.png'), title: 'Twitter'
+    %ul.nav.navbar-nav
+      %li= link_to t('.all_trips'), all_trips_path
+      %li= link_to t('.my_trips'), my_trips_path if @user

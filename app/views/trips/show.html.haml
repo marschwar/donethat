@@ -1,0 +1,14 @@
+.container
+  %ol.breadcrumb
+    %li= link_to('Home', trips_path)
+    %li= "#{@trip.title}"
+  .page-header
+    %h1= @trip.title
+    %p.highlighted
+      = t('by')
+      = "#{@trip.user.identifier}"
+      %br
+      = @trip.content
+  - if @google
+    #trip-map
+  = render partial: 'note', collection: @trip.notes.recent

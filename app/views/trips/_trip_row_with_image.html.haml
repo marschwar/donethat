@@ -1,0 +1,5 @@
+.col-md-4.trip
+  = image_tag trip.thumb_path, {alt: "#{trip.title}", class: "img-responsive"}
+.col-md-8.trip
+  %h2.featurette-heading= "#{trip.title}"
+  %p.lead= "#{trip.content}"

@@ -1,0 +1,24 @@
+
+$font-family-sans-serif: 'Noto Sans','Helvetica',sans serif;
+$font-family-serif: 'Noto Serif',Georgia,serif;
+$font-family-base: $font-family-serif;
+$headings-font-family: $font-family-sans-serif;
+
+/* colors */
+$donethat-light: #9AA5A6;
+$brand-primary: #737373;
+$navbar-default-bg: #735532;
+$navbar-default-brand-color: $donethat-light;
+$navbar-default-link-color: $donethat-light;
+$breadcrumb-bg: $donethat-light;
+
+/* container width */
+$container-lg: 990px;
+$container-desktop: 870px;
+$container-sm: 630px;
+
+@import "twitter/bootstrap";
+
+.navbar {
+  margin-bottom: 0;
+}
