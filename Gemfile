@@ -22,6 +22,7 @@ gem 'dragonfly'
 
 group :development do
   gem 'haml-rails'
+  gem 'faker'
 end
 
 # Gems used only for assets and not required
