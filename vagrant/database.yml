@@ -1,0 +1,32 @@
+# MySQL.  Versions 4.1 and 5.0 are recommended.
+#
+# The default vagrant file for using in the VM
+
+development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: dev
+  pool: 25
+  username: dev
+  password: dev
+  socket: /var/run/mysqld/mysqld.sock
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: test
+  pool: 25
+  username: test
+  password: test
+  socket: /var/run/mysqld/mysqld.sock
+
+production:
+  adapter: mysql2
+  database: donethat
+  encoding: utf8
+  pool: 25
+  username: donethat
+  password:
+  socket: /var/run/mysqld/mysqld.sock
