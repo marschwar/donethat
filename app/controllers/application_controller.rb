@@ -7,7 +7,7 @@ private
   def check_for_user
     id = session_user_id
     id = remember_me unless id
-    @user = User.find(id) if id
+    @user = User.where(id: id).first if id
   end
 
   def remember_me
