@@ -44,7 +44,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe 'build-essential'
     chef.add_recipe 'mysql::server'
     chef.add_recipe 'ruby_build'
-    chef.add_recipe 'rbenv::vagrant'
     chef.add_recipe 'rbenv::user'
     chef.add_recipe 'imagemagick'
 

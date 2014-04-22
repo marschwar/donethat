@@ -5,10 +5,10 @@ class Note < ActiveRecord::Base
   belongs_to :trip
 
   # Dragonfly image
-  image_accessor :image
+  dragonfly_accessor :image
 
-  scope :with_latest_image, where('notes.image_uid is not null').order('notes.image_changed desc').limit(1)
-  scope :recent, order('note_timestamp desc')
+  scope :with_latest_image, -> { where('notes.image_uid is not null').order('notes.image_changed desc').limit(1) }
+  scope :recent, -> { order('note_timestamp desc') }
   scope :changed_after, lambda { |date| where('updated_at > ?', date) }
 
   def lead
