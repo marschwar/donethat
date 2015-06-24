@@ -8,9 +8,9 @@ development:
   reconnect: false
   database: dev
   pool: 25
-  username: dev
-  password: dev
-  socket: /var/run/mysqld/mysqld.sock
+  username: admin
+  password: admin
+  host: <%= ENV['DB_PORT_3306_TCP_ADDR'] %>
 
 test:
   adapter: mysql2
@@ -18,8 +18,8 @@ test:
   reconnect: false
   database: test
   pool: 25
-  username: test
-  password: test
+  username: admin
+  password: admin
   socket: /var/run/mysqld/mysqld.sock
 
 production:

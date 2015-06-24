@@ -1,0 +1,21 @@
+web:
+  build: .
+  command: bin/rails server --port 3000 --binding 0.0.0.0
+  links:
+   - db
+  ports:
+   - "3000:3000"
+  volumes:
+    - .:/myapp
+  environment:
+    TWITTER_KEY:
+    TWITTER_SECRET:
+    GOOGLE_KEY:
+    GOOGLE_SECRET:
+    ANALYTICS_ACCOUNT:
+db:
+  image: tutum/mysql
+  ports:
+   - "3306:3306"
+  environment:
+    MYSQL_PASS: "admin"
