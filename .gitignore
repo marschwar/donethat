@@ -14,5 +14,5 @@
 /log/*.log
 /tmp
 
+.env
 /public/system/dragonfly
-.vagrant

@@ -35,10 +35,4 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  # Omniauth
-  config.omniauth_twitter_key = 'UcM8DwXkMaeZnUb3e51sEQ'
-  config.omniauth_twitter_secret = '7WBv9Kv1ERB6R4wjrzK9PgMPyBMOrCb67AztI4saZw'
-
-  config.omniauth_google_key = '306358665120.apps.googleusercontent.com'
-  config.omniauth_google_secret = 'Gp0dROlwhjpnywlSVquUD5Vh'
 end
