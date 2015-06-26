@@ -1,19 +1,17 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.1.0'
-gem 'protected_attributes'
-#gem 'active_resource'
-#gem 'actionpack-action_caching'
-gem 'activerecord-session_store'
-gem 'rails-observers'
+ruby '2.1.6'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem 'rails'
 
 gem 'mysql2'
 
-gem "uuid", "~> 2.3.7"
-gem "friendly_id", "~> 5.0.3"
+# multi threaded webserver
+gem 'puma'
+gem 'lograge'
+
+gem "uuid"
+gem "friendly_id"
 
 gem 'crypt19-rb'
 gem 'omniauth'
@@ -21,29 +19,29 @@ gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
 
 # image handling using dragonfly
-gem 'rack-cache', :require => 'rack/cache'
-gem 'dragonfly', '~> 1.0.4'
+gem 'dragonfly'
 
-gem 'sass-rails',   '~> 4.0.3'
-gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails', :github => 'anjlab/bootstrap-rails'
-
-gem 'coffee-rails', '~> 4.0.1'
-
+# Use SCSS for stylesheets
+gem 'sass-rails'
+gem 'twitter-bootstrap-rails'
+gem 'less-rails'
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier'
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-gem 'therubyracer', :platforms => :ruby
+gem 'therubyracer',  platforms: :ruby
 
-gem 'uglifier', '>= 1.0.3'
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder'
 
 group :development do
   gem 'haml-rails'
   gem 'faker'
+  gem 'quiet_assets'
 end
-
-
-gem 'jquery-rails'
-
-
-gem 'thin'
 
 # testing
 group :test do
@@ -52,17 +50,8 @@ group :test do
   gem 'mocha'
 end
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'
+group :production do
+  # see https://devcenter.heroku.com/articles/rails4
+  gem 'rails_12factor'
+  gem 'pg'
+end

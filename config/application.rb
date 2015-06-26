@@ -20,11 +20,12 @@ module Donethat
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    # Omniauth
-    config.omniauth_twitter_key = nil
-    config.omniauth_twitter_secret = nil
-
-    config.omniauth_google_key = nil
-    config.omniauth_google_secret = nil
+    unless Rails.env.test?
+      log_level = Rails.env.development? ? 'DEBUG' : String(ENV['LOG_LEVEL'] || "info").upcase
+      config.logger = Logger.new(STDOUT)
+      config.logger.level = Logger.const_get(log_level)
+      config.log_level = log_level
+      config.lograge.enabled = true
+    end
   end
 end

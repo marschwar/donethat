@@ -19,9 +19,9 @@
       .navbar-text.pull-right
         = 'Login with'
         %a{href: '/auth/google_oauth2'}
-          = image_tag asset_path('social/google24.png'), title: 'Google'
+          = image_tag 'social/google24.png', title: 'Google'
         %a{href: '/auth/twitter'}
-          = image_tag asset_path('social/twitter24.png'), title: 'Twitter'
+          = image_tag 'social/twitter24.png', title: 'Twitter'
     %ul.nav.navbar-nav
       %li= link_to t('.all_trips'), all_trips_path
       %li= link_to t('.my_trips'), my_trips_path if @user
