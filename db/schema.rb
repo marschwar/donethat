@@ -11,19 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131010112254) do
+ActiveRecord::Schema.define(version: 20150626182739) do
 
-  create_table "notes", force: true do |t|
-    t.string   "uid",                                      null: false
-    t.integer  "trip_id",                                  null: false
-    t.string   "title"
-    t.string   "slug"
-    t.text     "content"
-    t.decimal  "longitude",      precision: 15, scale: 10
-    t.decimal  "latitude",       precision: 15, scale: 10
-    t.string   "image_uid"
-    t.integer  "image_changed"
-    t.integer  "note_timestamp"
+  create_table "notes", force: :cascade do |t|
+    t.string   "uid",            limit: 255,                             null: false
+    t.integer  "trip_id",        limit: 4,                               null: false
+    t.string   "title",          limit: 255
+    t.string   "slug",           limit: 255
+    t.text     "content",        limit: 65535
+    t.decimal  "longitude",                    precision: 15, scale: 10
+    t.decimal  "latitude",                     precision: 15, scale: 10
+    t.string   "image_uid",      limit: 255
+    t.integer  "image_changed",  limit: 4
+    t.integer  "note_timestamp", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,13 +31,23 @@ ActiveRecord::Schema.define(version: 20131010112254) do
   add_index "notes", ["slug"], name: "index_notes_on_slug", unique: true, using: :btree
   add_index "notes", ["trip_id"], name: "idx_notes_trip", using: :btree
 
-  create_table "trips", force: true do |t|
-    t.string   "uid",                       null: false
-    t.integer  "user_id",                   null: false
-    t.boolean  "public",     default: true, null: false
-    t.string   "title",                     null: false
-    t.string   "slug"
-    t.text     "content"
+  create_table "sessions", force: :cascade do |t|
+    t.string   "session_id", limit: 255,   null: false
+    t.text     "data",       limit: 65535
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
+
+  create_table "trips", force: :cascade do |t|
+    t.string   "uid",        limit: 255,                  null: false
+    t.integer  "user_id",    limit: 4,                    null: false
+    t.boolean  "public",     limit: 1,     default: true, null: false
+    t.string   "title",      limit: 255,                  null: false
+    t.string   "slug",       limit: 255
+    t.text     "content",    limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -45,14 +55,14 @@ ActiveRecord::Schema.define(version: 20131010112254) do
   add_index "trips", ["slug"], name: "index_trips_on_slug", unique: true, using: :btree
   add_index "trips", ["user_id"], name: "idx_trips_user", using: :btree
 
-  create_table "users", force: true do |t|
-    t.string   "type",       null: false
-    t.string   "identifier", null: false
-    t.string   "secret"
+  create_table "users", force: :cascade do |t|
+    t.string   "type",       limit: 255, null: false
+    t.string   "identifier", limit: 255, null: false
+    t.string   "secret",     limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
-    t.string   "avatar_uid"
+    t.string   "name",       limit: 255
+    t.string   "avatar_uid", limit: 255
   end
 
 end

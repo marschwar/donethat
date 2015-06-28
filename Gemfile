@@ -9,6 +9,7 @@ gem 'mysql2'
 # multi threaded webserver
 gem 'puma'
 gem 'lograge'
+gem 'activerecord-session_store'
 
 gem "uuid"
 gem "friendly_id"
