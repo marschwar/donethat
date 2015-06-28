@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#clear'
 
   # Omniauth success callback
-  get '/auth/:provider/callback', to: 'sessions#create'
+  get  '/auth/:provider/callback', to: 'sessions#create'
+  post '/auth/:provider/callback', to: 'sessions#create'
 
   # API
   namespace :api do

@@ -1,7 +1,8 @@
 class SessionsController < ApplicationController
 
-  def create
+  skip_before_filter :verify_authenticity_token, only: [:create]
 
+  def create
     logger.info "Auth-Hash: #{auth_hash}"
     user = auth_service.handle_auth_success auth_hash
     logger.info "User: #{user.try(:inspect)}"
