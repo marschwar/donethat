@@ -1,7 +1,7 @@
 .container
   %h1= t('.headline')
   %p=  t('.subheadline')
-- if @carousel_items
+- unless @carousel_items.blank?
   = render partial: 'carousel', locals: { trips: @carousel_items }
 - if @trips
   .container.marketing.trip

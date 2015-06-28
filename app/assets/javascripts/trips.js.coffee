@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(document).ready( ->
-  $('.carousel').carousel( ->
+  $('.js-carousel').carousel( ->
     interval: 1000
   )
 )
