@@ -1,6 +1,6 @@
 web:
   build: .
-  command: bundle exec puma -C config/puma.rb
+  command: bundle exec puma -t 0:1
   links:
    - db
   ports:
