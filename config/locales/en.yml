@@ -28,3 +28,5 @@ en:
     index:
       headline: Going places?
       subheadline: Don't forget to track your trip and share with friends
+    form:
+      create: Create Trip

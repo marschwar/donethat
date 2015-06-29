@@ -3,6 +3,22 @@ class TripsController < ApplicationController
   TripsController::CAROUSEL_ITEM_COUNT = 3;
   TripsController::PER_PAGE = 10;
 
+  def new
+    redirect_to '/trips/all' unless @user
+    @trip = Trip.new(user: @user)
+  end
+
+  def create
+    @trip = Trip.create(trip_params)
+    @trip.uid = SecureRandom.uuid
+    if @trip.save
+      redirect_to @trip
+    else
+      logger.info @trip.errors
+      render 'new'
+    end
+  end
+
   # GET /trips
   # GET /trips.json
   def index
@@ -35,7 +51,7 @@ class TripsController < ApplicationController
   # GET /trips/1
   # GET /trips/1.json
   def show
-    @trip = Trip.find(params[:id])
+    @trip = Trip.friendly.find(params[:id])
     # TODO: allowed?
     @google = maps_service.maps_data_json(@trip.notes.recent)
 
@@ -48,5 +64,9 @@ class TripsController < ApplicationController
 private
   def maps_service
     @maps_service ||= GoogleMapsService.new self
+  end
+
+  def trip_params
+    params.require(:trip).permit(:user_id, :title, :content, :public)
   end
 end

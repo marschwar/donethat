@@ -1,0 +1,16 @@
+= form_for trip, url: {action: "create"}, html: {class: ''} do |f|
+  = f.hidden_field :user_id
+  .form-group
+    = f.label :title
+    = f.text_field :title
+    %p.help-block= t '.help.title'
+  .form-group
+    = f.label :content
+    = f.text_area :content
+    %p.help-block= t '.help.content'
+  .form-group
+    = f.label :public
+    = f.check_box :public
+    %p.help-block= t '.help.public'
+  .form-group
+    = f.submit t '.create'
