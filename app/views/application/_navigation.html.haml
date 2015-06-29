@@ -8,7 +8,7 @@
     = link_to 'donethat.de', trips_path, class: 'navbar-brand'
   .collapse.navbar-collapse.navbar-ex1-collapse
     - if @user
-      .pull-right.avatar= image_tag @user.avatar_navigation_path if @user.avatar
+      .pull-right.avatar= image_tag @user.avatar.thumb.url if @user.avatar
       .navbar-text.dropdown.pull-right
         %a.dropdown-toggle{href: '#', 'data-toggle' =>"dropdown"}
           = "#{@user.name}"

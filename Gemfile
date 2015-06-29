@@ -19,8 +19,9 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
 
-# image handling using dragonfly
-gem 'dragonfly'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog', '~> 1.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'

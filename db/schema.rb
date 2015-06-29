@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20150626182739) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name",       limit: 255
-    t.string   "avatar_uid", limit: 255
+    t.string   "avatar",     limit: 255
   end
 
 end
