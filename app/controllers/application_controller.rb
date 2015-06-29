@@ -1,13 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :check_for_user
+  before_filter :set_current_user
 
 private
-  def check_for_user
-    id = session_user_id
-    id = remember_me unless id
-    @user = User.where(id: id).first if id
+  def set_current_user
+    id = session_user_id || remember_me
+    @user = User.find(id) if id
   end
 
   def remember_me
