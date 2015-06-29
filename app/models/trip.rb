@@ -22,27 +22,16 @@ class Trip < ActiveRecord::Base
   end
 
   def image?
-#    notes.with_latest_image.present?
-    true
+    false
   end
 
   def thumb_path
-    note = notes.with_latest_image.first
-    image = note.present? ? note.image : dummy_image
-    image.thumb('450x300#').url
+    nil
   end
 
   def carousel_image_path
-    note = notes.with_latest_image.first
-    image = note.present? ? note.image : dummy_image
-#    image.thumb('300x200#').url
-    image.process(:resize, '960^').process(:crop, width: 960, height: 500, gravity: 'c').url
-  end
-
-private
-
-  def dummy_image
-    image = Dragonfly.app.generate(:plain, 800, 600, 'rgba(128,128,128,0.5)')
+    note = notes.last
+    nil
   end
 
 end

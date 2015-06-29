@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150626182739) do
+ActiveRecord::Schema.define(version: 20150629151001) do
 
   create_table "notes", force: :cascade do |t|
     t.string   "uid",            limit: 255,                             null: false
@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 20150626182739) do
     t.text     "content",        limit: 65535
     t.decimal  "longitude",                    precision: 15, scale: 10
     t.decimal  "latitude",                     precision: 15, scale: 10
-    t.string   "image_uid",      limit: 255
     t.integer  "image_changed",  limit: 4
     t.integer  "note_timestamp", limit: 4
     t.datetime "created_at"
