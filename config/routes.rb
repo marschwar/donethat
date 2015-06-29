@@ -21,9 +21,6 @@ Rails.application.routes.draw do
     resources :trips do
       resources :notes
     end
-    # initial request to retrieve user_id
-    get '/auth/twitter/:identifier', to: 'api/auth#twitter_auth'
-    get '/auth/google/:identifier', to: 'api/auth#google_auth'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
