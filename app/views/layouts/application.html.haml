@@ -6,6 +6,7 @@
       = 'Donethat'
     = stylesheet_link_tag "http://fonts.googleapis.com/css?family=Noto+Sans:400,700|Noto+Serif:400,700", :media => "all"
     = stylesheet_link_tag "application"
+    = render partial: "google_head" if @google
 
     %body
       .table-display
@@ -14,4 +15,3 @@
         .table-row= render partial: 'footer'
         = render partial: 'shared/google_script' if @google
     = javascript_include_tag "application"
-    = render partial: "google_head" if @google
