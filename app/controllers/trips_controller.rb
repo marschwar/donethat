@@ -14,7 +14,6 @@ class TripsController < ApplicationController
     if @trip.save
       redirect_to @trip
     else
-      logger.info @trip.errors
       render 'new'
     end
   end
@@ -22,13 +21,15 @@ class TripsController < ApplicationController
   # GET /trips
   # GET /trips.json
   def index
-    visible_trips = Trip.visible(@user).recent
-    @carousel_items = visible_trips.slice(0..(TripsController::CAROUSEL_ITEM_COUNT-1))
-    @trips = visible_trips.slice(TripsController::CAROUSEL_ITEM_COUNT, TripsController::PER_PAGE - TripsController::CAROUSEL_ITEM_COUNT)
+    visible_trips = Trip.visible(@user).recent.first_n(TripsController::PER_PAGE)
+    with_images = visible_trips.select { |t| t.image? }
+
+    @carousel_items = with_images.slice(0..(TripsController::CAROUSEL_ITEM_COUNT - 1))
+    @trips = visible_trips - @carousel_items
     @carousel = @trips and @trips.count > 6
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: visible_trips }
     end
   end

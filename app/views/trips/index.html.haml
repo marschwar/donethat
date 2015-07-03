@@ -1,6 +1,8 @@
 .container
   %h1= t('.headline')
   %p=  t('.subheadline')
+  .panel
+    = link_to t('actions.new_trip'), new_trip_path, class: 'btn btn-primary'
 - unless @carousel_items.blank?
   = render partial: 'carousel', locals: { trips: @carousel_items }
 - if @trips

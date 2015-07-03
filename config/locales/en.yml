@@ -24,9 +24,36 @@ en:
     navigation:
       all_trips: All Trips
       my_trips: My Trips
+  activerecord:
+    attributes:
+      trip:
+        content:  Description
+  actions:
+    new_trip: Create a new Trip
+    new_note: Add a note to your Trip
   trips:
     index:
       headline: Going places?
       subheadline: Don't forget to track your trip and share with friends
     form:
+      help:
+        title: Enter the name of the trip. Short and sweet. You might want to include the year of the trip as well.
+        content: Here you put in an even longer description of your trip. Whom did you go with? What was the occasion?
+        public: Activate this box if you want everyone to be able to follow you on your trip. If not checked only you will be able to see your notes.
       create: Create Trip
+    new:
+      title: Create a new Trip
+  notes:
+    form:
+      placeholder:
+        longitude: Longitude
+        latitude: Latitude
+      help:
+        title: This can either be a place, a day, an event. Simply anything you want to share.
+        datetime: When did it happen?
+        content: This is the place where you put all the dirty details.
+        location: To automatically put a pin on the map you must enter the geo coordinates.
+      create: Create Note
+    new:
+      title: Create a new Trip
+

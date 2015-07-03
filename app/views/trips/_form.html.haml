@@ -2,11 +2,11 @@
   = f.hidden_field :user_id
   .form-group
     = f.label :title
-    = f.text_field :title
+    = f.text_field :title, class: 'form-control'
     %p.help-block= t '.help.title'
   .form-group
     = f.label :content
-    = f.text_area :content
+    = f.text_area :content, class: 'form-control'
     %p.help-block= t '.help.content'
   .form-group
     = f.label :public

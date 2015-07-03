@@ -1,0 +1,23 @@
+= form_for [note.trip, note], url: {action: "create"}, html: {novalidate: 'novalidate'} do |f|
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control'
+    %p.help-block= t '.help.title'
+  .form-group
+    = f.label :note_datetime
+    = f.datetime_local_field :note_datetime, class: 'form-control'
+    %p.help-block= t '.help.datetime'
+  .form-group
+    = f.label :location
+    .row
+      .col-xs-6
+        = f.text_field :longitude, class: 'form-control', placeholder: t('.placeholder.longitude')
+      .col-xs-6
+        = f.text_field :latitude, class: 'form-control', placeholder: t('.placeholder.latitude')
+    %p.help-block= t '.help.location'
+  .form-group
+    = f.label :content
+    = f.text_area :content, class: 'form-control', rows: 10
+    %p.help-block= t '.help.content'
+  .form-group
+    = f.submit t '.create'
