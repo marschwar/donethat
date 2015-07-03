@@ -1,6 +1,6 @@
 web:
   build: .
-  command: bundle exec puma -t 0:1
+  command: bundle exec puma -C config/puma.rb
   links:
    - db
   ports:
@@ -13,6 +13,8 @@ web:
     GOOGLE_KEY:
     GOOGLE_SECRET:
     ANALYTICS_ACCOUNT:
+    MAX_THREADS: 3
+    WEB_CONCURRENCY: 0
 db:
   image: tutum/mysql
   ports:
