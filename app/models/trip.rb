@@ -5,7 +5,7 @@ class Trip < ActiveRecord::Base
 
   belongs_to :user
 
-  has_many :notes, :dependent => :destroy
+  has_many :notes, dependent: :destroy
 
   validates :uid, presence: true
   validates :user, presence: true
@@ -23,16 +23,19 @@ class Trip < ActiveRecord::Base
   end
 
   def image?
-    false
+    !!image
   end
 
   def thumb_path
-    nil
+    image.thumb.url if image?
+  end
+
+  def image
+    @image ||= notes.with_image.recent.first.try(:picture)
   end
 
   def carousel_image_path
-    note = notes.last
-    nil
+    image.carousel.url if image?
   end
 
 end

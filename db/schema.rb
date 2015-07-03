@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150629151001) do
+ActiveRecord::Schema.define(version: 20150703142734) do
 
   create_table "notes", force: :cascade do |t|
     t.string   "uid",            limit: 255,                             null: false
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20150629151001) do
     t.integer  "note_timestamp", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "picture",        limit: 255
   end
 
   add_index "notes", ["slug"], name: "index_notes_on_slug", unique: true, using: :btree

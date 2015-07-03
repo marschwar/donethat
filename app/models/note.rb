@@ -1,6 +1,8 @@
 class Note < ActiveRecord::Base
   extend FriendlyId
 
+  mount_uploader :picture, PictureUploader
+
   friendly_id :title, use: [:slugged, :scoped], :scope => :trip
   belongs_to :trip
 
@@ -12,7 +14,9 @@ class Note < ActiveRecord::Base
 
   scope :recent, -> { order('note_timestamp desc') }
   scope :changed_after, lambda { |date| where('updated_at > ?', date) }
+  scope :with_image, -> { where('picture is not null') }
 
+  attr_accessor :picture_cache
   attr_accessor :note_datetime
 
   def lead
@@ -20,7 +24,15 @@ class Note < ActiveRecord::Base
   end
 
   def image?
-    false
+    picture.present?
+  end
+
+  def image_path
+    picture.main.url if image?
+  end
+
+  def thumb_path
+    picture.thumb.url if image?
   end
 
   def create_ts

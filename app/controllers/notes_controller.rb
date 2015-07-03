@@ -51,6 +51,6 @@ private
   end
 
   def note_params
-    params.require(:note).permit(:title, :content, :longitude, :latitude, :note_datetime)
+    params.require(:note).permit(:title, :content, :longitude, :latitude, :note_datetime, :picture)
   end
 end
