@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20150703142734) do
   create_table "trips", force: :cascade do |t|
     t.string   "uid",        limit: 255,                  null: false
     t.integer  "user_id",    limit: 4,                    null: false
-    t.boolean  "public",     limit: 1,     default: true, null: false
+    t.boolean  "public",     default: true, null: false
     t.string   "title",      limit: 255,                  null: false
     t.string   "slug",       limit: 255
     t.text     "content",    limit: 65535
