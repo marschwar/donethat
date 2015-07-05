@@ -24,15 +24,19 @@ class Note < ActiveRecord::Base
   end
 
   def image?
-    picture.present?
+    image.present?
+  end
+
+  def image
+    picture
   end
 
   def image_path
-    picture.main.url if image?
+    image.main.url if image?
   end
 
   def thumb_path
-    picture.thumb.url if image?
+    image.thumb.url if image?
   end
 
   def create_ts

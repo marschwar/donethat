@@ -1,28 +1,37 @@
 class Api::ApiController < ActionController::Base
 
-  before_filter :read_auth_token
-
-  def trips
-    
-  end
+  before_filter :authenticate_user
 
 private
-  def read_auth_token
-    token = request.headers['X-Auth-Token']
-    ip = request.env['REMOTE_ADDR']
-    begin
-      if token.present?
-        hash = crypto_service.decrypt_server_hash token
-        raise "REMOTE_ADDR #{hash['ip']} expected but was #{ip}" if hash['ip'] && hash['ip'] != ip
-        @user = User.find(hash['id'])
-      end
-    rescue Exception => e
-      logger.info "#{e}: invalid auth token #{token}"
+
+  def authenticate_user
+    if user_name && password
+      @user = User.where(identifier: user_name).select { |u| u.authenticate(password) }.try(:first)
     end
     head(:unauthorized) unless @user
   end
 
   def crypto_service
     @crypto_service ||= CryptoService.new
+  end
+
+  def auth_token
+    request.headers['X-Auth-Token']
+  end
+
+  def user_name
+    extract_auth_token unless @user_name
+    @user_name
+  end
+
+  def password
+    extract_auth_token unless @password
+    @password
+  end
+
+  def extract_auth_token
+    /\A(?<username>.*):(?<password>.*)\Z/ =~ auth_token
+    @user_name = username
+    @password = password
   end
 end
