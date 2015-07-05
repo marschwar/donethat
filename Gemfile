@@ -39,8 +39,9 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
 
+gem 'haml-rails'
+
 group :development do
-  gem 'haml-rails'
   gem 'faker'
   gem 'quiet_assets'
 end
