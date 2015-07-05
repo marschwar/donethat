@@ -16,8 +16,10 @@ web:
     MAX_THREADS: 3
     WEB_CONCURRENCY: 0
 db:
-  image: tutum/mysql
+  image: postgres
   ports:
-   - "3306:3306"
+    - "5432"
   environment:
-    MYSQL_PASS: "admin"
+    POSTGRES_PASSWORD: "admin"
+    POSTGRES_USER: "admin"
+    POSTGRES_PORT_5432_TCP_ADDR:

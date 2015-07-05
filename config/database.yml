@@ -1,32 +1,26 @@
 # MySQL.  Versions 4.1 and 5.0 are recommended.
 #
 # The default vagrant file for using in the VM
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
 
 development:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
+  <<: *default
   database: dev
-  pool: 25
   username: admin
   password: admin
-  host: <%= ENV['DB_PORT_3306_TCP_ADDR'] %>
+  host: db
 
 test:
-  adapter: mysql2
-  encoding: utf8
-  reconnect: false
+  <<: *default
   database: test
-  pool: 25
   username: admin
   password: admin
-  socket: /var/run/mysqld/mysqld.sock
+  host: db
 
 production:
-  adapter: mysql2
-  database: donethat
-  encoding: utf8
-  pool: 25
-  username: donethat
-  password:
-  socket: /var/run/mysqld/mysqld.sock
+  <<: *default

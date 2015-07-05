@@ -13,16 +13,19 @@
 
 ActiveRecord::Schema.define(version: 20150703142734) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "notes", force: :cascade do |t|
-    t.string   "uid",            limit: 255,                             null: false
-    t.integer  "trip_id",        limit: 4,                               null: false
+    t.string   "uid",            limit: 255,                           null: false
+    t.integer  "trip_id",                                              null: false
     t.string   "title",          limit: 255
     t.string   "slug",           limit: 255
-    t.text     "content",        limit: 65535
-    t.decimal  "longitude",                    precision: 15, scale: 10
-    t.decimal  "latitude",                     precision: 15, scale: 10
-    t.integer  "image_changed",  limit: 4
-    t.integer  "note_timestamp", limit: 4
+    t.text     "content"
+    t.decimal  "longitude",                  precision: 15, scale: 10
+    t.decimal  "latitude",                   precision: 15, scale: 10
+    t.integer  "image_changed"
+    t.integer  "note_timestamp"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "picture",        limit: 255
@@ -32,8 +35,8 @@ ActiveRecord::Schema.define(version: 20150703142734) do
   add_index "notes", ["trip_id"], name: "idx_notes_trip", using: :btree
 
   create_table "sessions", force: :cascade do |t|
-    t.string   "session_id", limit: 255,   null: false
-    t.text     "data",       limit: 65535
+    t.string   "session_id", limit: 255, null: false
+    t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -42,12 +45,12 @@ ActiveRecord::Schema.define(version: 20150703142734) do
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   create_table "trips", force: :cascade do |t|
-    t.string   "uid",        limit: 255,                  null: false
-    t.integer  "user_id",    limit: 4,                    null: false
-    t.boolean  "public",     default: true, null: false
-    t.string   "title",      limit: 255,                  null: false
+    t.string   "uid",        limit: 255,                null: false
+    t.integer  "user_id",                               null: false
+    t.boolean  "public",                 default: true, null: false
+    t.string   "title",      limit: 255,                null: false
     t.string   "slug",       limit: 255
-    t.text     "content",    limit: 65535
+    t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
