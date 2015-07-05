@@ -10,6 +10,7 @@ gem 'mysql2'
 gem 'puma'
 gem 'lograge'
 gem 'activerecord-session_store'
+gem 'bcrypt'
 
 gem "uuid"
 gem "friendly_id"

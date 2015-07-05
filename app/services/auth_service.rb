@@ -13,7 +13,7 @@ class AuthService
     info = auth_hash[:info]
     user.name = info[:name]
     user.remote_avatar_url = info[:image] if info[:image]
-    user.secret = auth_hash[:credentials][:token]
+    user.password = auth_hash[:credentials][:token]
 
     user.save!
 
