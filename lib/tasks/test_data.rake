@@ -75,7 +75,7 @@ class TestDataHelper
     n.content = Faker::Lorem.paragraphs.join '\n'
     n.longitude = random_float -94, -80
     n.latitude = random_float 32, 42
-    n.image_url = 'http://lorempixel.com/600/400/' if rand(5) > 0
+    n.remote_avatar_url = 'http://lorempixel.com/600/400/' if rand(5) > 0
     n.note_timestamp = Time.now.to_i - rand(60 * 60 * 24 * 10)
     n.save!
 

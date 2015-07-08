@@ -4,7 +4,7 @@ ruby '2.1.6'
 
 gem 'rails'
 
-gem 'mysql2'
+gem 'pg'
 
 # multi threaded webserver
 gem 'puma'
@@ -15,14 +15,14 @@ gem 'bcrypt'
 gem "uuid"
 gem "friendly_id"
 
-gem 'crypt19-rb'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
+gem 'cancan'
 
 gem 'carrierwave'
 gem 'mini_magick'
-gem 'fog', '~> 1.0'
+gem 'carrierwave-aws'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'
@@ -57,5 +57,4 @@ end
 group :production do
   # see https://devcenter.heroku.com/articles/rails4
   gem 'rails_12factor'
-  gem 'pg'
 end
