@@ -1,6 +1,7 @@
 class NotesController < ApplicationController
 
-  before_action :load_trip, only: [:new, :create, :show]
+  before_action :load_trip, only: [:new, :create, :show, :edit, :update]
+
   # GET /notes
   # GET /notes.json
   def index
@@ -26,6 +27,17 @@ class NotesController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def edit
+    @note = @trip.notes.friendly.find(params[:id])
+  end
+
+  def update
+    @note = @trip.notes.friendly.find(params[:id])
+    @note.update note_params
+
+    redirect_to trip_note_url(@trip, @note)
   end
 
   # GET /notes/1

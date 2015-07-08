@@ -54,6 +54,7 @@ en:
         content: This is the place where you put all the dirty details.
         location: To automatically put a pin on the map you must enter the geo coordinates.
       create: Create Note
+      update: Update Note
     new:
       title: Create a new Trip
 
