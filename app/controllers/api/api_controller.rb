@@ -11,10 +11,6 @@ private
     head(:unauthorized) unless @user
   end
 
-  def crypto_service
-    @crypto_service ||= CryptoService.new
-  end
-
   def auth_token
     request.headers['X-Auth-Token']
   end
