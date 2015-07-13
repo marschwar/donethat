@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_current_user
 
+  def current_user
+    @user ||= set_current_user
+  end
+
 private
   def set_current_user
     id = session_user_id || remember_me
