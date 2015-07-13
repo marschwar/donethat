@@ -1,9 +1,11 @@
 !!! Strict
 %html{html_attrs(lang='de-DE')}
   %head
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
     = csrf_meta_tag
-    %title
-      = 'Donethat'
+    %title= content_for?(:title) ? yield(:title) : "Donethat"
     = stylesheet_link_tag "//fonts.googleapis.com/css?family=Noto+Sans:400,700|Noto+Serif:400,700", :media => "all"
     = stylesheet_link_tag "application"
     = render partial: "google_head" if @google
