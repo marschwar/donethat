@@ -13,7 +13,7 @@ class AuthService
     info = auth_hash[:info]
     user.name = info[:name]
     user.remote_avatar_url = info[:image] if info[:image]
-    user.password = auth_hash[:credentials][:token]
+    user.password = auth_hash[:credentials][:token] || developer_password
 
     user.save!
 
@@ -25,5 +25,9 @@ private
   def user_class_name(provider)
     clazz = Donethat::Application.config.omniauth_provider_mapping[provider.to_sym]
     clazz ? clazz : "#{provider.camelize}User"
+  end
+
+  def developer_password
+    return 'password' if Rails.env.development?
   end
 end
