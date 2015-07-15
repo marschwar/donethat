@@ -6,11 +6,13 @@ class Api::TripsControllerTest < ActionController::TestCase
     @user = create :twuser, password: password
     @trip = create :trip, user: @user
     create :trip # someone elses trip
+
+    @request.headers["Content-Type"] = 'application/json'
   end
 
   context 'an unauthorized user' do
     should "be rejected" do
-      get :index, format: :json
+      get :index
       assert_response :unauthorized
     end
   end
@@ -33,14 +35,14 @@ class Api::TripsControllerTest < ActionController::TestCase
     end
 
     should "fail to retrieve with invalid uid" do
-      get :show, id: 'unknown-uid', format: :json
+      get :show, id: 'unknown-uid'
       assert_response :not_found
     end
 
     should "create a new trip" do
       a_trip = build :trip
       assert_difference('Trip.count') do
-        post :create, trip: { uid: a_trip.uid, title: a_trip.title, content: a_trip.content }, format: :json
+        post :create, { uid: a_trip.uid, title: a_trip.title, content: a_trip.content }.to_json, format: :json
       end
       assert_response :success
       assert_equal a_trip.title, json_response[:title]
@@ -49,7 +51,7 @@ class Api::TripsControllerTest < ActionController::TestCase
     should "fail if data is incomplete" do
       a_trip = build :trip
       assert_no_difference('Trip.count') do
-        post :create, trip: { uid: a_trip.uid, content: a_trip.content }, format: :json
+        post :create, { uid: a_trip.uid, content: a_trip.content }.to_json
       end
       assert_response :bad_request
     end
@@ -57,7 +59,7 @@ class Api::TripsControllerTest < ActionController::TestCase
     should "fail if uid exists" do
       a_trip = build :trip
       assert_no_difference('Trip.count') do
-        post :create, trip: { uid: @trip.uid, title: a_trip.title, content: a_trip.content }, format: :json
+        post :create, { uid: @trip.uid, title: a_trip.title, content: a_trip.content }.to_json
       end
       assert_response :bad_request
     end
