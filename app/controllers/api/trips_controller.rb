@@ -7,7 +7,7 @@ class Api::TripsController < Api::ApiController
 
   # /api/trips/:uid
   def show
-    @trip = trips.where(uid: params['id']).first
+    @trip = trips.where(uid: params[:uid]).first
     head(:not_found) unless @trip
   end
 
@@ -16,7 +16,7 @@ class Api::TripsController < Api::ApiController
     if @trip
       @trip.user = current_user
       if @trip.save
-        head :created, location: trip_path(@trip)
+        head :created, location: api_trip_path(@trip.uid)
       else
         render json: @trip.errors, status: :bad_request
       end

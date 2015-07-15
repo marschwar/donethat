@@ -29,13 +29,13 @@ class Api::TripsControllerTest < ActionController::TestCase
     end
 
     should "retrieve a trip" do
-      get :show, id: @trip.uid, format: :json
+      get :show, uid: @trip.uid, format: :json
       assert_response :success
       assert_equal @trip.title, json_response[:title]
     end
 
     should "fail to retrieve with invalid uid" do
-      get :show, id: 'unknown-uid'
+      get :show, uid: 'unknown-uid'
       assert_response :not_found
     end
 
@@ -45,6 +45,7 @@ class Api::TripsControllerTest < ActionController::TestCase
         post :create, { uid: a_trip.uid, title: a_trip.title, content: a_trip.content }.to_json, format: :json
       end
       assert_response :created
+      assert_equal "/api/trips/#{a_trip.uid}", @response.headers['Location']
     end
 
     should "fail if data is incomplete" do
