@@ -63,6 +63,31 @@ class Api::TripsControllerTest < ActionController::TestCase
       end
       assert_response :bad_request
     end
+
+    should "update an existing trip" do
+      a_trip = build :trip
+      assert_no_difference('Trip.count') do
+        @request.env['RAW_POST_DATA'] = { title: a_trip.title, content: a_trip.content }.to_json
+        put :update, uid: @trip.uid
+      end
+      assert_response :accepted
+    end
+
+    should "not be able to remove title" do
+      a_trip = build :trip
+      @request.env['RAW_POST_DATA'] = { title: '', content: a_trip.content }.to_json
+      put :update, uid: @trip.uid
+      assert_response :bad_request
+    end
+
+    should "not be able to update from someone else" do
+      a_trip = build :trip
+      someones_trip = create :trip
+      @request.env['RAW_POST_DATA'] = { title: a_trip.title, content: a_trip.content }.to_json
+      put :update, uid: someones_trip.uid
+      assert_response :not_found
+    end
+
   end
 
 private
