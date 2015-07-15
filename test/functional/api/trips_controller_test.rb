@@ -44,8 +44,7 @@ class Api::TripsControllerTest < ActionController::TestCase
       assert_difference('Trip.count') do
         post :create, { uid: a_trip.uid, title: a_trip.title, content: a_trip.content }.to_json, format: :json
       end
-      assert_response :success
-      assert_equal a_trip.title, json_response[:title]
+      assert_response :created
     end
 
     should "fail if data is incomplete" do

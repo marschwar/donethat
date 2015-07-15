@@ -16,7 +16,7 @@ class Api::TripsController < Api::ApiController
     if @trip
       @trip.user = current_user
       if @trip.save
-        render :show
+        head :created, location: trip_path(@trip)
       else
         render json: @trip.errors, status: :bad_request
       end
