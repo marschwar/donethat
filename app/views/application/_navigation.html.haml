@@ -23,5 +23,5 @@
         %a{href: '/auth/twitter'}
           = image_tag 'social/twitter24.png', title: 'Twitter'
     %ul.nav.navbar-nav
-      %li= link_to t('.all_trips'), all_trips_path
+      %li= link_to t('.all_trips'), trips_path
       %li= link_to t('.my_trips'), my_trips_path if @user

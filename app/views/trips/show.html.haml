@@ -9,8 +9,9 @@
       = "#{@trip.user.name}"
       %br
       = @trip.content
-  .panel
-    = link_to t('actions.new_note'), new_trip_note_path(@trip), class: 'btn btn-primary'
+  - if can? :create, @trip => Note
+    .panel
+      = link_to t('actions.new_note'), new_trip_note_path(@trip), class: 'btn btn-primary'
   - if @google
     #trip-map
   = render partial: 'note', collection: @trip.notes.recent

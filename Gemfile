@@ -18,7 +18,7 @@ gem "friendly_id"
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
-gem 'cancan'
+gem 'cancancan'
 
 gem 'carrierwave'
 gem 'mini_magick'

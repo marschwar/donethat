@@ -1,12 +1,11 @@
 class NotesController < ApplicationController
 
-  before_action :load_trip, only: [:new, :create, :show, :edit, :update]
+  load_and_authorize_resource :trip
+  load_and_authorize_resource :note, through: :trip
 
   # GET /notes
   # GET /notes.json
   def index
-    @notes = Note.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @notes }

@@ -5,7 +5,6 @@ Rails.application.routes.draw do
     resources :notes
     collection do
       get :my
-      get :all
     end
   end
 

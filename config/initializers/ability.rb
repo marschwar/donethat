@@ -12,14 +12,19 @@ class Ability
 
 private
   def guest
-
+    can :read, Trip, public: true
+    can :read, Note, trip: { public: true }
   end
 
   def user
     guest
+
+    alias_action :create, :read, :update, :destroy, to: :crud
+
     can :create, Trip
-    can [:manage], Trip do |trip|
-      trip.owned_by @user
-    end
+    can [:crud], Trip, user_id: @user.id
+    can [:my], Trip, user_id: @user.id
+
+    can [:crud], Note, trip: { user_id: @user.id }
   end
 end

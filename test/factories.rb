@@ -7,8 +7,8 @@ FactoryGirl.define do
   sequence(:identifier) { |n| "someone-#{n}@somewhere.com"}
   factory :user do
     identifier
-    secret "secret"
-    type 'LocalUser'
+    password "secret"
+    type 'DeveloperUser'
 
     factory :twuser, class: TwitterUser do
       type 'TwitterUser'
@@ -19,10 +19,11 @@ FactoryGirl.define do
     uid
     user
     title
+    content 'any content'
     public false
 
     factory(:trip_with_notes) do
-      ignore do
+      transient do
         note_count 10
       end
 
@@ -36,6 +37,8 @@ FactoryGirl.define do
     uid
     title
     trip
+    content 'some content'
+    note_timestamp Time.now
 
     factory(:note_with_location) do
       longitude 10.0

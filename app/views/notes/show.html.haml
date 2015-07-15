@@ -7,6 +7,9 @@
     %h1= @note.title
     %p.highlighted
       = format_date(@note.created_at)
+  - if can? :update, @note
+    .panel
+      = link_to t('actions.edit_note'), edit_trip_note_path(@trip, @note), class: 'btn btn-primary'
   - if @note.image?
     .row
       .col-md-12

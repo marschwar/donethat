@@ -2,48 +2,78 @@ require 'test_helper'
 
 class TripsControllerTest < ActionController::TestCase
   setup do
-    @trip = trips(:one)
+    @trip = create(:trip)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:trips)
-  end
-
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create trip" do
-    assert_difference('Trip.count') do
-      post :create, trip: { slug: @trip.slug, title: @trip.title }
+  context 'a user' do
+    setup do
+      ensure_logged_in
     end
 
-    assert_redirected_to trip_path(assigns(:trip))
+    should "should get new for user" do
+      get :new
+      assert_response :success
+    end
+    should "create trip" do
+      assert_difference('Trip.count') do
+        post :create, trip: { title: 'new title', content: 'any content', user_id: @trip.user_id }
+      end
+
+      assert_redirected_to trip_path(assigns(:trip))
+    end
+    should "not create trip without title" do
+      assert_no_difference('Trip.count') do
+        post :create, trip: { content: 'something', user_id: @trip.user_id }
+      end
+
+      assert_response :success
+    end
+    should "show trip to owner" do
+      get :show, id: @trip.slug
+      assert_response :success
+    end
+    should "not see private trip by other user" do
+      ensure_logged_in create :user
+      get :show, id: @trip.slug
+      assert_response :forbidden
+    end
+    should "be able to see update form" do
+      get :edit, id: @trip.slug
+      assert_response :success
+    end
   end
 
-  test "should show trip" do
-    get :show, id: @trip
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, id: @trip
-    assert_response :success
-  end
-
-  test "should update trip" do
-    put :update, id: @trip, trip: { slug: @trip.slug, title: @trip.title }
-    assert_redirected_to trip_path(assigns(:trip))
-  end
-
-  test "should destroy trip" do
-    assert_difference('Trip.count', -1) do
-      delete :destroy, id: @trip
+  context 'a guest' do
+    should "be able to see index" do
+      get :index
+      assert_response :success
+      assert_not_nil assigns(:trips)
     end
 
-    assert_redirected_to trips_path
+    should "be able to see create form" do
+      get :new
+      assert_response :forbidden
+    end
+    should "not be able to create trip" do
+      assert_no_difference('Trip.count') do
+        post :create, trip: { content: 'new title' }
+      end
+      assert_response :forbidden
+    end
+    should "be able see public trip" do
+      @trip = create :trip, public: true
+      get :show, id: @trip.slug
+      assert_response :success
+    end
+    should "not see private trip" do
+      get :show, id: @trip.slug
+      assert_response :forbidden
+    end
   end
+
+private
+  def ensure_logged_in(user = @trip.user)
+    session[:user_id] = user.id
+  end
+
 end

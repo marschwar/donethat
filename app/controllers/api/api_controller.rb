@@ -2,6 +2,10 @@ class Api::ApiController < ActionController::Base
 
   before_filter :authenticate_user
 
+  def current_user
+    @user
+  end
+
 private
 
   def authenticate_user
