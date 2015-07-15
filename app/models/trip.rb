@@ -7,7 +7,7 @@ class Trip < ActiveRecord::Base
 
   has_many :notes, dependent: :destroy
 
-  validates :uid, presence: true
+  validates :uid, presence: true, uniqueness: true
   validates :user, presence: true
   validates :title, presence: true
 
