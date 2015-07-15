@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'mocha/test_unit'
 
 class GoogleMapsServiceTest < ActiveSupport::TestCase
   setup do

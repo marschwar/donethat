@@ -8,7 +8,7 @@ class AuthServiceTest < ActiveSupport::TestCase
   context 'twitter' do
     setup do
       @uid = 'aabbcc'
-      @auth_hash = {provider: 'twitter', uid: @uid, info: { name: 'Donald Duck' }}
+      @auth_hash = {provider: 'twitter', uid: @uid, info: { name: 'Donald Duck' }, credentials: {token: 'token'}}
     end
 
     context 'auth_success' do
@@ -26,7 +26,7 @@ class AuthServiceTest < ActiveSupport::TestCase
   context 'google' do
     setup do
       @uid = 'aabbcc'
-      @auth_hash = {provider: 'google_oauth2', uid: @uid, info: { name: 'Donald Duck' }}
+      @auth_hash = {provider: 'google_oauth2', uid: @uid, info: { name: 'Donald Duck' }, credentials: {token: 'token'}}
     end
 
     context 'auth_success' do
