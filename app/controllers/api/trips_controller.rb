@@ -28,7 +28,7 @@ class Api::TripsController < Api::ApiController
   def update
     @trip = trips.find_by(uid: params[:uid])
     if @trip
-      @trip.update trip_hash.except(:uid)
+      @trip.update trip_params.except(:uid)
       if @trip.save
         head :accepted
       else
@@ -45,14 +45,10 @@ class Api::TripsController < Api::ApiController
     end
 
     def parse_trip
-      Trip.new trip_hash
+      Trip.new trip_params
     end
 
-    def trip_hash
+    def trip_params
       json.slice(:uid, :title, :content, :public, :created_at, :updated_at) || {}
-    end
-
-    def json
-      @json ||= JSON.parse(request.body.read).try(:with_indifferent_access)
     end
 end

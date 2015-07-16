@@ -34,4 +34,9 @@ private
     @user_name = username
     @password = password
   end
+
+  def json
+    @json ||= JSON.parse(request.body.read).try(:with_indifferent_access)
+  end
+
 end
