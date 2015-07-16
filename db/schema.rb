@@ -11,24 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150705092153) do
+ActiveRecord::Schema.define(version: 20150716095335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "notes", force: :cascade do |t|
-    t.string   "uid",            limit: 255,                           null: false
-    t.integer  "trip_id",                                              null: false
-    t.string   "title",          limit: 255
-    t.string   "slug",           limit: 255
+    t.string   "uid",           limit: 255,                           null: false
+    t.integer  "trip_id",                                             null: false
+    t.string   "title",         limit: 255
+    t.string   "slug",          limit: 255
     t.text     "content"
-    t.decimal  "longitude",                  precision: 15, scale: 10
-    t.decimal  "latitude",                   precision: 15, scale: 10
+    t.decimal  "longitude",                 precision: 15, scale: 10
+    t.decimal  "latitude",                  precision: 15, scale: 10
     t.integer  "image_changed"
-    t.integer  "note_timestamp"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "picture",        limit: 255
+    t.string   "picture",       limit: 255
+    t.date     "note_date"
   end
 
   add_index "notes", ["slug"], name: "index_notes_on_slug", unique: true, using: :btree

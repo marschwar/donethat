@@ -38,7 +38,7 @@ FactoryGirl.define do
     title
     trip
     content 'some content'
-    note_timestamp Time.now
+    note_date Date.yesterday
 
     trait :with_location do
       longitude 10.0

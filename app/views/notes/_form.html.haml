@@ -4,8 +4,8 @@
     = f.text_field :title, class: 'form-control'
     %p.help-block= t '.help.title'
   .form-group
-    = f.label :note_datetime
-    = f.datetime_local_field :note_datetime, class: 'form-control'
+    = f.label :note_date
+    = f.date_field :note_date, class: 'form-control'
     %p.help-block= t '.help.datetime'
   .form-group
     = f.label :location

@@ -10,14 +10,12 @@ class Note < ActiveRecord::Base
   validates :title, length: { in: 5..50 }
   validates_presence_of :content
   validates_with ::LocationValidator
-  validates :note_timestamp, numericality: true
 
-  scope :recent, -> { order('note_timestamp desc') }
+  scope :recent, -> { order('note_date desc') }
   scope :changed_after, lambda { |date| where('updated_at > ?', date) }
   scope :with_image, -> { where('picture is not null') }
 
   attr_accessor :picture_cache
-  attr_accessor :note_datetime
 
   def lead
     content.truncate(400, separator: ' ') if content
@@ -41,20 +39,6 @@ class Note < ActiveRecord::Base
 
   def create_ts
     created_at.to_f * 1000
-  end
-
-  def note_datetime=(string)
-    if string
-      @note_datetime = string.to_datetime rescue nil
-      self.note_timestamp = @note_datetime.to_i if @note_datetime
-    else
-      note_timestamp = nil
-      @note_datetime = nil
-    end
-  end
-
-  def note_datetime
-    @note_datetime ||= Time.at(note_timestamp).to_datetime if note_timestamp
   end
 
 end

@@ -13,7 +13,7 @@ class NotesController < ApplicationController
   end
 
   def new
-    @note = Note.new(trip: @trip, note_datetime: DateTime.now)
+    @note = Note.new(trip: @trip, note_date: Date.today)
   end
 
   def create
@@ -62,6 +62,6 @@ private
   end
 
   def note_params
-    params.require(:note).permit(:title, :content, :longitude, :latitude, :note_datetime, :picture)
+    params.require(:note).permit(:title, :content, :longitude, :latitude, :note_date, :picture)
   end
 end

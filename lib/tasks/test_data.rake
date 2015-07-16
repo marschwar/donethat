@@ -56,8 +56,9 @@ class TestDataHelper
     t = Trip.new
     t.uid = uuid_generator.generate
     t.user = any_user
-    t.title = Faker::Lorem.sentence
+    t.title = Faker::Lorem.sentence.truncate(50, seperator: ' ', omission: '')
     t.content = Faker::Lorem.paragraph
+    t.public = rand(10) < 7
 
     note_count ||= rand(15) + 5
     1.upto(note_count) { create_note t }
@@ -71,12 +72,12 @@ class TestDataHelper
     n = Note.new
     n.trip = trip
     n.uid = uuid_generator.generate
-    n.title = Faker::Lorem.sentence
+    n.title = Faker::Lorem.sentence.truncate(50, seperator: ' ', omission: '')
     n.content = Faker::Lorem.paragraphs.join '\n'
     n.longitude = random_float -94, -80
     n.latitude = random_float 32, 42
-    n.remote_avatar_url = 'http://lorempixel.com/600/400/' if rand(5) > 0
-    n.note_timestamp = Time.now.to_i - rand(60 * 60 * 24 * 10)
+    n.remote_picture_url = 'http://lorempixel.com/600/400/' if rand(5) > 0
+    n.note_date = Date.today - rand(50).days
     n.save!
 
     n

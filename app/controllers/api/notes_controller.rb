@@ -2,7 +2,7 @@ class Api::NotesController < Api::ApiController
 
   before_filter :load_and_authorize_trip
 
-  MAPPING = { lon: :longitude, lat: :latitude, 'note_date' => :note_datetime }.with_indifferent_access
+  MAPPING = { lon: :longitude, lat: :latitude }.with_indifferent_access
 
   def create
     @note = Note.new note_params

@@ -34,13 +34,13 @@ class GoogleMapsServiceTest < ActiveSupport::TestCase
     end
 
     should 'work for two notes with the same coordinates' do
-      data = @service.maps_data([create(:note_with_location), create(:note_with_location)])
+      data = @service.maps_data([create(:note, :with_location), create(:note, :with_location)])
       assert_equal 10.0, data[:center][:lon]
       assert_equal 5.0, data[:center][:lat]
     end
 
     should 'two notes but one without coordinates' do
-      data = @service.maps_data([create(:note_with_location), create(:note)])
+      data = @service.maps_data([create(:note, :with_location), create(:note)])
       assert_equal 10.0, data[:center][:lon]
       assert_equal 5.0, data[:center][:lat]
     end

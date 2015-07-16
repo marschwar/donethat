@@ -33,7 +33,7 @@ class Api::NotesControllerTest < ActionController::TestCase
       assert_equal @trip, persisted_note.trip
       assert_equal note.longitude, persisted_note.longitude
       assert_equal note.latitude, persisted_note.latitude
-      assert_equal note.note_timestamp, persisted_note.note_timestamp
+      assert_equal note.note_date, persisted_note.note_date
     end
 
     should "update a note" do
@@ -49,7 +49,7 @@ class Api::NotesControllerTest < ActionController::TestCase
       assert_equal @trip, existing_note.trip
       assert_equal note.longitude, existing_note.longitude
       assert_equal note.latitude, existing_note.latitude
-      assert_equal note.note_timestamp, existing_note.note_timestamp
+      assert_equal note.note_date, existing_note.note_date
     end
   end
 
@@ -70,7 +70,7 @@ private
       uid: note.uid,
       title: note.title,
       content: note.content,
-      note_date: note.note_datetime
+      note_date: note.note_date
     }
     if note.longitude && note.latitude
       result[:location] = { lon: note.longitude, lat: note.latitude }
