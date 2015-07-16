@@ -22,7 +22,7 @@ FactoryGirl.define do
     content 'any content'
     public false
 
-    factory(:trip_with_notes) do
+    trait(:with_notes) do
       transient do
         note_count 10
       end

@@ -43,7 +43,7 @@ class Api::NotesControllerTest < ActionController::TestCase
       assert_no_difference('@trip.notes.count') do
         put_json hash_from_note(note), existing_note
       end
-      assert_response :accepted
+      assert_response :no_content
 
       existing_note.reload
       assert_equal @trip, existing_note.trip
@@ -51,6 +51,15 @@ class Api::NotesControllerTest < ActionController::TestCase
       assert_equal note.latitude, existing_note.latitude
       assert_equal note.note_date, existing_note.note_date
     end
+    should "delete a note" do
+      trip = create :trip, :with_notes
+      authenticate_user trip.user
+      assert_difference('trip.notes.count', - 1) do
+        delete :destroy, trip_uid: trip.uid, uid: trip.notes.sample.uid
+      end
+      assert_response :no_content
+    end
+
   end
 
 private

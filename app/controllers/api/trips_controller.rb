@@ -30,10 +30,20 @@ class Api::TripsController < Api::ApiController
     if @trip
       @trip.update trip_params.except(:uid)
       if @trip.save
-        head :accepted
+        head :no_content
       else
         render json: @trip.errors, status: :bad_request
       end
+    else
+      head :not_found
+    end
+  end
+
+  def destroy
+    @trip = trips.find_by(uid: params[:uid])
+    if @trip
+      @trip.delete
+      head :no_content
     else
       head :not_found
     end

@@ -70,7 +70,7 @@ class Api::TripsControllerTest < ActionController::TestCase
         @request.env['RAW_POST_DATA'] = { title: a_trip.title, content: a_trip.content }.to_json
         put :update, uid: @trip.uid
       end
-      assert_response :accepted
+      assert_response :no_content
     end
 
     should "not be able to remove title" do
@@ -92,6 +92,23 @@ class Api::TripsControllerTest < ActionController::TestCase
       someones_trip = create :trip, public: true
       @request.env['RAW_POST_DATA'] = { title: 'title', content: 'content' }.to_json
       put :update, uid: someones_trip.uid
+      assert_response :not_found
+    end
+
+    should "delete his own trip" do
+      trip = create :trip, :with_notes
+      authenticate_user trip.user
+      assert_difference('Trip.count', -1) do
+        delete :destroy, uid: trip.uid
+      end
+      assert_response :no_content
+    end
+
+    should "not delete someone elses trip" do
+      authenticate_user create :user
+      assert_no_difference('Trip.count') do
+        delete :destroy, uid: @trip.uid
+      end
       assert_response :not_found
     end
 

@@ -25,10 +25,10 @@ class FactoriesTest < ActiveSupport::TestCase
   end
 
   test 'create trip with notes' do
-    t = create(:trip_with_notes)
+    t = create(:trip, :with_notes)
     assert_equal 10, t.notes.count
 
-    t = create(:trip_with_notes, note_count: 5)
+    t = create(:trip, :with_notes, note_count: 5)
     assert_equal 5, t.notes.count
   end
 

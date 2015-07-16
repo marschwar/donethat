@@ -21,10 +21,17 @@ class Api::NotesController < Api::ApiController
     @note.update note_params.except(:uid)
 
     if @note.save
-      head :accepted
+      head :no_content
     else
       render json: @note.errors, status: :bad_request
     end
+  end
+
+  def destroy
+    @note = @trip.notes.find_by(uid: params[:uid])
+    head :not_found and return unless @note
+    @note.delete
+    head :no_content
   end
 
 private
