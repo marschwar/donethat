@@ -41,7 +41,7 @@ class Api::TripsController < Api::ApiController
 
   private
     def trips
-      Trip.accessible_by(current_ability)
+      Trip.owned_by(current_user)
     end
 
     def parse_trip

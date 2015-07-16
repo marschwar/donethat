@@ -88,6 +88,13 @@ class Api::TripsControllerTest < ActionController::TestCase
       assert_response :not_found
     end
 
+    should "not be able to update from someone else even if it is public" do
+      someones_trip = create :trip, public: true
+      @request.env['RAW_POST_DATA'] = { title: 'title', content: 'content' }.to_json
+      put :update, uid: someones_trip.uid
+      assert_response :not_found
+    end
+
   end
 
 private

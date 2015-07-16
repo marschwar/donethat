@@ -12,6 +12,7 @@ class Trip < ActiveRecord::Base
   validates :title, presence: true
 
   scope :recent, -> { order('updated_at desc') }
+  scope :owned_by, -> (user) { where(user: user) }
   scope :first_n, -> (count=1) { limit(count) }
   scope :changed_after, lambda { |timestamp| where('updated_at > ?', timestamp) }
 
