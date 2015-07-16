@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   # API
   namespace :api do
     resources :trips, param: :uid do
-      resources :notes, param: :uid
+      resources :notes, param: :uid, only: [:create, :update, :destroy]
     end
   end
 

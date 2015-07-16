@@ -43,16 +43,6 @@ class Note < ActiveRecord::Base
     created_at.to_f * 1000
   end
 
-  def as_json(options = {})
-    options.merge!(
-      {
-        :only => [:uid, :title, :content, :longitude, :latitude, :image_changed],
-        :methods => [:image_path, :created_ts]
-      }
-    )
-    super options
-  end
-
   def note_datetime=(string)
     if string
       @note_datetime = string.to_datetime rescue nil

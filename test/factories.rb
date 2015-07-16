@@ -1,7 +1,7 @@
 require "factory_girl"
 
 FactoryGirl.define do
-  sequence(:uid) { |n| "#{n}"}
+  sequence(:uid) { |n| "UUID-#{n}"}
   sequence(:title) { |n| "Some title #{n}"}
 
   sequence(:identifier) { |n| "someone-#{n}@somewhere.com"}
@@ -40,7 +40,7 @@ FactoryGirl.define do
     content 'some content'
     note_timestamp Time.now
 
-    factory(:note_with_location) do
+    trait :with_location do
       longitude 10.0
       latitude 5.0
     end

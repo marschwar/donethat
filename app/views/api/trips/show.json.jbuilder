@@ -8,6 +8,7 @@ json.notes @trip.notes do |note|
   json.title note.title
   json.uid note.uid
   json.note_date note.note_datetime
+  json.updated_at note.updated_at
   if note.longitude && note.latitude
     json.location do
       json.lon note.longitude

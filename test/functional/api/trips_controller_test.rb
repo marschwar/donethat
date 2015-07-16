@@ -3,7 +3,7 @@ require 'test_helper'
 class Api::TripsControllerTest < ActionController::TestCase
 
   setup do
-    @user = create :twuser, password: password
+    @user = create :twuser
     @trip = create :trip, user: @user
     create :trip # someone elses trip
 
@@ -95,24 +95,6 @@ class Api::TripsControllerTest < ActionController::TestCase
       assert_response :not_found
     end
 
-  end
-
-private
-  def authenticate_user(user = @trip.user)
-    request.headers['X-Auth-Token'] = "#{user.identifier}:#{password}"
-  end
-
-  def password
-    'password'
-  end
-
-  def json_response
-    response = ActiveSupport::JSON.decode @response.body
-    if response.class == Hash
-      response.with_indifferent_access
-    else
-      response
-    end
   end
 
 end

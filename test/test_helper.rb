@@ -10,4 +10,18 @@ class ActiveSupport::TestCase
 #  fixtures :all
 
   include FactoryGirl::Syntax::Methods
+
+  def authenticate_user(user = @trip.user, pwd = 'secret')
+    request.headers['X-Auth-Token'] = "#{user.identifier}:#{pwd}"
+  end
+
+  def json_response
+    response = ActiveSupport::JSON.decode @response.body
+    if response.class == Hash
+      response.with_indifferent_access
+    else
+      response
+    end
+  end
+
 end

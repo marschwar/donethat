@@ -35,8 +35,12 @@ private
     @password = password
   end
 
-  def json
-    @json ||= JSON.parse(request.body.read).try(:with_indifferent_access)
+  def body_as_json
+    @json ||= JSON.parse(body).try(:with_indifferent_access)
+  end
+
+  def body
+    request.body.read
   end
 
 end

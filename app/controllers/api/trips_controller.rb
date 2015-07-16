@@ -49,6 +49,6 @@ class Api::TripsController < Api::ApiController
     end
 
     def trip_params
-      json.slice(:uid, :title, :content, :public, :created_at, :updated_at) || {}
+      body_as_json.slice(:uid, :title, :content, :public, :created_at, :updated_at) || {}
     end
 end
